@@ -1,3 +1,9 @@
+/*
+ * Program 3.1 - Numbers 1 - 3
+ * Author: Taylor Freiner
+ * Date: 9-7-17
+ * Log: Program 3.1 from book, no changes
+ */
 #include <stdio.h>
 #include <stdlib.h>
 #include <unistd.h>
