@@ -5,4 +5,6 @@
    i:3 process ID:23328  
    i:4 process ID:23329  
 
+3. Since the rate at which processes die and are created is equal, there is no limit to how long the program will run, killing and creating processes.  However, no more than about 33,000 distinct processes can be created.  After that many processes has been created, the program starts back over at about 300.
+
 4. When 'sleep(10)' is added, the maximum number of processes generated is 28.
