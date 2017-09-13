@@ -1,10 +1,20 @@
 1.
+When running this program multiples times with different values, several things are evident.
+First, the process IDs seem to consistently appear in order, with each ID being one more than the next.  
+In addition, the command prompt consitently appears somewhere in the middle of the processes.
+Roughly half of the processes are adopted by init.
 
-2. i:1 process ID:23326  
-   i:2 process ID:23327  
-   i:3 process ID:23328  
-   i:4 process ID:23329  
+2.
+i:1 process ID:23326  
+i:2 process ID:23327  
+i:3 process ID:23328  
+i:4 process ID:23329  
 
-3. Since the rate at which processes die and are created is equal, there is no limit to how long the program will run, killing and creating processes.  However, no more than about 33,000 distinct processes can be created.  After that many processes has been created, the program starts back over at about 300.
+3.
+Since the rate at which processes die and are created is equal, there is no limit to how long the program will run, killing and creating processes.  However, no more than about 33,000 distinct processes can be created.  After that many processes has been created, the program starts back over at about 300.
 
-4. When 'sleep(10)' is added, the maximum number of processes generated is 28.
+4.
+When 'sleep(10)' is added, the maximum number of processes generated is 28.
+
+5.
+ 
