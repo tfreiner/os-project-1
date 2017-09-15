@@ -1,8 +1,10 @@
 1.
 When running this program multiples times with different values, several things are evident.
-First, the process IDs seem to consistently appear in order, with each ID being one more than the next.  
-In addition, the command prompt consitently appears somewhere in the middle of the processes.
-Roughly half of the processes are adopted by init.
+- First, the process IDs seem to usually  appear in order, with each ID being one more than the next.
+- However, this is not always the case, sometimes the processes appear out of order.  
+- In addition, the command prompt consistently appears somewhere in the middle of the processes.
+- Roughly half of the processes are adopted by init.
+- The max number of processes is around 33,000, at which point the program loops back to about process ID 300.
 
 2.
 i:1 process ID:23326  
@@ -11,10 +13,26 @@ i:3 process ID:23328
 i:4 process ID:23329  
 
 3.
-Since the rate at which processes die and are created is equal, there is no limit to how long the program will run, killing and creating processes.  However, no more than about 33,000 distinct processes can be created.  After that many processes has been created, the program starts back over at about 300.
+Since the rate at which processes die and are created is equal, there is no limit to how long the program will run, killing and creating processes.  However, no more than about 33,000 distinct processes can be created.  After that many processes has been created, the program starts back over at about ID 300.
 
 4.
 When 'sleep(10)' is added, the maximum number of processes generated is 28.
 
 5.
- 
+When running this program, it can be seen that n processes are displayed for every k iteration of the last loop.
+In addition, the processes are the same when displayed, with matching process, parent, and child IDs. 
+Unlike in program1, where the process IDs increase by 1 each time they are created, in this program they are reset back to where they were before each iteration.
+
+6.
+When the wait function is added before the last fprintf, the processes are displayed in reverse order. This is because each one waits for the previous, so they are thus displayed in reverse order.
+
+7.
+When the fprint statement is broken into 4, at first it appears there is no difference when a small number is used for n.
+However, as the n value is increasd, the IDs become intermingled with each other.
+This is most often seen by two i IDs that are right next to each other.
+
+8.
+This program reads nchar characters from stdin and stores them in the mybuf array.  After nchar characters have been entered and the enter key is pressed, the first process is displayed followed by the mybuf string.
+Then the program waits for the next character to be entered.
+This program exhibits unexpected behavior because it does not wait for nchar characters each time for each process, but rather after any character is entered, it is immediately displayed for that process and then waits for another character for the next process.
+

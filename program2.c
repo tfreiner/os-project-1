@@ -1,8 +1,8 @@
 /*
  * Program 3.1 - Number 4
  * Author: Taylor Freiner
- * Date: 9-13-17
- * Log: Adding error checking
+ * Date: 9-14-17
+ * Log: Adding perror
  */
 #include <stdio.h>
 #include <stdlib.h>
@@ -13,9 +13,8 @@
 
 int main (int argc, char *argv[]) {
 	pid_t childpid = 0;
-	int i, n;
-	char nvalue;
-	char option;
+	int i, n, option;
+	char argval;
 	if (argc != 2 && argc != 3){
 		fprintf(stderr, "%s Error: Incorrect number of arguments\n", argv[0]);
 		return 1;
@@ -23,29 +22,33 @@ int main (int argc, char *argv[]) {
 	while ((option = getopt(argc, argv, "hn:")) != -1){
 		switch(option) {
 			case 'h':
-				printf("usage: %s <-n x>\n", argv[0]);
-				printf("\t-n x: number of processes to create\n");
-				printf("\t-h help\n");
+				printf("usage: %s <-n positive_integer>\n", argv[0]);
+				printf("\t-n: number of processes to create\n");
+				printf("\t-h: help\n");
 				return 0;
 				break;
 			case 'n':
-				nvalue = *optarg;
-				if(isdigit(nvalue))
+				argval = *optarg;
+				if(isdigit(argval) && (atoi(optarg) > 0))
 					n = atoi(optarg);
 				else{
-					fprintf(stderr, "%s Error: Argument must be a digit\n", argv[0]);
-					return 0;
+					fprintf(stderr, "%s Error: Argument must be a positive integer\n", argv[0]);
+					return 1;
 				}
 				break;
 			case '?':
-				fprintf(stderr, "%s Error: usage: %s <-n x>\n", argv[0], argv[0]);
-				return 0;
+				fprintf(stderr, "%s Error: usage: %s <-n positive_integer>\n", argv[0], argv[0]);
+				return 1;
 				break;			
 		}
 	}
 	for (i = 1; i < n; i++){
-		if (childpid = fork())
+		if ((childpid = fork()))
 			break;
+		if(childpid == -1){
+			printf("%s: ", argv[0]);
+			perror("Error:");
+		}
 	}
 	sleep(10);
 	fprintf(stderr, "i:%d  process ID:%ld  parent ID:%ld  child ID:%ld\n",

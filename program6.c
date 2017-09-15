@@ -1,8 +1,8 @@
 /*
  * Program 3.1 - Number 8 
  * Author: Taylor Freiner
- * Date: 9-13-17
- * Log: Adding error checking
+ * Date: 9-14-17
+ * Log: Adding perror
  */
 #include <stdio.h>
 #include <stdlib.h>
@@ -14,8 +14,7 @@
 int main (int argc, char *argv[]) {
 	pid_t childpid = 0;
 	int i, j, n, nchars, opt;
-	char x, argval;
-	char* mybuf;
+	char argval;
 	static struct option nchars_option[] = {
 		{"nchars", required_argument, NULL, 'c'}
 	};
@@ -23,49 +22,55 @@ int main (int argc, char *argv[]) {
 		fprintf(stderr, "%s Error: Incorrect number of arguments\n", argv[0]);
 		return 1;
 	}
-	while ((opt = getopt_long(argc, argv, "hn:c:", nchars_option, 0)) != -1){
+	while ((opt = getopt_long(argc, argv, "hn:c:", nchars_option, NULL)) != -1){
 		switch(opt){
 			case 'h':
-				printf("usage: %s <-n x> <--nchars y>\n", argv[0]);
-				printf("\t-n x: number of processes to create\n");
-				printf("\t--nchars y: length of string\n");	
-				printf("\t-h help\n");
+				printf("usage: %s <-n positive_integer> <--nchars positive_integer>\n", argv[0]);
+				printf("\t-n: number of processes to create\n");
+				printf("\t--nchars: length of string\n");	
+				printf("\t-h: help\n");
 				return 0;
 				break;
 			case 'n':
 				argval = *optarg;
-				if(isdigit(argval)){
+				if(isdigit(argval) && (atoi(optarg) > 0)){
 					n = atoi(optarg);
-					printf("N: %d\n", n);
 				}
 				else{
-					fprintf(stderr, "%s Error: Argument must be a digit\n", argv[0]);
+					fprintf(stderr, "%s Error: Argument must be a positive integer\n", argv[0]);
 					return 1;
 				}
 				break;
 			case 'c':
 				argval = *optarg;
-				if(isdigit(argval)){
+				if(isdigit(argval) && (atoi(optarg) > 0)){
+					printf("%s\n", optarg);
+					printf("%d\n", atoi(optarg));
+					nchars = 0;
 					nchars = atoi(optarg);
-					printf("%d", nchars);
+					printf("%d\n", nchars);
 				}
 				else{
-					fprintf(stderr, "%s Error: Argument must be a digit\n", argv[0]);
+					fprintf(stderr, "%s Error: Argument must be a positive integer\n", argv[0]);
 					return 1;
 				}
 				break;
 			case '?':
-				fprintf(stderr, "%s Error: usage: %s <-n x>\n", argv[0], argv[0]);
+				fprintf(stderr, "%s Error: usage: %s <-n positive_integer>\n", argv[0], argv[0]);
 				return 1;
 				break;
 		}
 	}
 
 	for (i = 1; i < n; i++) {
-		if (childpid = fork())
+		if ((childpid = fork()))
 			break;
+		if(childpid == -1){
+			printf("%s: ", argv[0]);
+			perror("Error:");
+		}
 	}
-
+	char mybuf[nchars+1];
 	for (j = 0; j < nchars; j++) {
 		mybuf[j] = getc(stdin);
 	}
