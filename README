@@ -1,6 +1,10 @@
-This project contains 6 programs.  program1 is for questions 1 - 3, program2 is for question 4 etc.
+Taylor Freiner
+OS Project 1
+Repo. https://github.com/tfreiner/os-project-1
 
-To run these programs, simple type 'make' to create the executables, and then type the executable names followed by the options and arguments.
+This project contains 6 programs.  program1 is for questions 1 - 3, program2 is for question 4, program3 is for question 5, etc. 
+
+To run these programs, simply type 'make' to create the executables, and then type the executable names followed by the options and arguments.
 Use option -h to display the usage for each executable.
 
 When finished you can type make clean to remove the executables.

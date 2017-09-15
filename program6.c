@@ -44,11 +44,8 @@ int main (int argc, char *argv[]) {
 			case 'c':
 				argval = *optarg;
 				if(isdigit(argval) && (atoi(optarg) > 0)){
-					printf("%s\n", optarg);
-					printf("%d\n", atoi(optarg));
 					nchars = 0;
 					nchars = atoi(optarg);
-					printf("%d\n", nchars);
 				}
 				else{
 					fprintf(stderr, "%s Error: Argument must be a positive integer\n", argv[0]);
